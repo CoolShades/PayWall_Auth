@@ -6,12 +6,12 @@ import pymysql
 def generate_key():
     # Generate a unique key
     key = str(uuid.uuid4())
-    # Set expiry time for 24 hours from now
-    expiry = int(time.time()) + (24 * 60 * 60)
+    # Set expiry time for 1 minute from now
+    expiry = int(time.time()) + 60  # 60 seconds for 1 minute
     return key, expiry
 
 def save_key_to_database(key, expiry):
-    # Placeholder for database connection and insertion logic
+    # Database connection and insertion logic
     connection = pymysql.connect(host='paywall.doctorsvote.app',
                                  port=3306,
                                  user='prospectivepay',
@@ -22,10 +22,11 @@ def save_key_to_database(key, expiry):
         sql = "INSERT INTO auth_keys (`key`, `expiry`) VALUES (%s, %s)"
         try:
             cursor.execute(sql, (key, expiry))
+            connection.commit()
         except pymysql.Error as e:
             print(f"Database error: {e}")
-    connection.commit()
-    connection.close()
+        finally:
+            connection.close()
 
 def create_auth_uri(key):
     # Construct the URI with the key
@@ -39,5 +40,5 @@ if st.button('Generate Authentication Key'):
     save_key_to_database(key, expiry)
     uri = create_auth_uri(key)
     st.success(f'Generated Key: {key}')
-    st.write(f'Expires in 24 hours.')
+    st.write('Expires in 1 minute.')
     st.markdown(f'Access URI: [Click here to authenticate]({uri})')
