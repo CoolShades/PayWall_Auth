@@ -30,7 +30,7 @@ def save_key_to_database(key, expiry):
 
 def create_auth_uri(key):
     # Construct the URI with the key
-    uri = f"http://paywall.doctorsvote.app/authenticate?key={key}"
+    uri = f"http://paywall.doctorsvote.app/prospectivepay?key={key}"
     return uri
 
 st.title('Authentication Key Generator and Access URI')
