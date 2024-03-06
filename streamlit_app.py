@@ -42,5 +42,5 @@ if st.button('Generate Authentication Key'):
     save_key_to_database(key, expiry)
     uri = create_auth_uri(key)
     st.success(f'Generated Key: {key}')
-    st.write('Expires in 1 minute.')
+    st.write('Expires in 3 hours.')
     st.markdown(f'Access URI: [Click here to authenticate]({uri})')
