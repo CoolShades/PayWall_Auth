@@ -8,7 +8,7 @@ import pymysql
 def generate_key():
     # Generate a unique key
     key = str(uuid.uuid4())
-    # Set expiry time for 1 minute from now
+    # Set expiry time for 3 hours from now
     expiry = int(time.time()) + (3600*3)  # 3 hours
     return key, expiry
 
