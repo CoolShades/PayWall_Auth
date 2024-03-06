@@ -9,7 +9,7 @@ def generate_key():
     # Generate a unique key
     key = str(uuid.uuid4())
     # Set expiry time for 1 minute from now
-    expiry = int(time.time()) + 60  # 60 seconds for 1 minute
+    expiry = int(time.time()) + 3600  # 3600 seconds for 1 hour
     return key, expiry
 
 def save_key_to_database(key, expiry):
